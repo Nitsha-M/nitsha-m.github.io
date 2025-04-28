@@ -28,7 +28,9 @@ var daysData;
 var loadConfigs = function() {
     let url = 'config.json?v=' + new Date().getTime();
     return new Promise((resolve, reject) => {
-        fetch(url)
+        fetch(url, {
+            cache: 'no-cache' // Отключаем кэширование
+        })
             .then(response => response.json())
             .then(data => {
                 startDay = data.config.startDay;

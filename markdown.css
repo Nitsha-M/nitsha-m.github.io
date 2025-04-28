@@ -1,0 +1,145 @@
+.notes__text img {
+    max-width: 100%;
+    border-radius: 0.4rem;
+}
+
+.notes__text p {
+    width: 100%;
+}
+
+.notes__text pre {
+    background: #e1e1e1;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 0 0.5px var(--border-color);
+    overflow-x: auto;
+}
+
+.notes__text blockquote {
+    position: relative;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    margin: 0;
+    box-shadow: inset 0 0 0 0.5px var(--border-color);
+}
+
+.notes__text blockquote p { 
+    padding: 0.4rem 0.8rem;
+}
+
+.notes__text blockquote::before {
+    background-color: #ff6347 !important;
+    left: 0 !important;
+}
+
+.notes__text blockquote::after,
+.notes__text blockquote::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: absolute;
+    border-radius: 0.4rem;
+    left: 0.2rem;
+    z-index: -1;
+    top: 0;
+}
+
+/* Списки */
+
+.notes__text ul, .notes__text ol {
+    padding-left: 20px;
+    margin: 0;
+}
+
+/* Для обычного ненумерованного списка */
+.notes__text ul {
+    list-style-type: none;
+}
+
+.notes__text ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.notes__text ul li::before {
+    content: '⦿';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ff6347;
+}
+
+.notes__text ol {
+    list-style-type: none;
+    counter-reset: item; /* Сброс счетчика для основного списка */
+}
+
+.notes__text ol > li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    counter-increment: item; /* Инкремент для основного списка */
+}
+
+/* Добавление кастомных номеров для основного списка */
+.notes__text ol > li::before {
+    content: counter(item) '.'; /* Нумерация для первого уровня */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ff6347;
+    font-weight: 600;
+}
+
+/* Вложенный список (ul) для подсписков */
+.notes__text ol li ul {
+    list-style-type: none; /* Убираем маркеры у вложенных списков */
+    counter-reset: subitem; /* Сброс счетчика для вложенных элементов */
+    padding-left: 20px; /* Отступ для вложенных списков */
+}
+
+.notes__text ol li ul li {
+    counter-increment: subitem; /* Инкремент для вложенного списка */
+}
+
+/* Добавление кастомных номеров для вложенных элементов */
+.notes__text ol li ul li::before {
+    content: counter(item) '.' counter(subitem) '.'; /* Нумерация для вложенных элементов */
+    position: absolute;
+    left: -20px;
+    top: 0;
+    color: #ff6347;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Для вложенных списков */
+.notes__text ul ul, .notes__text ol ol {
+    margin-top: 10px;
+}
+
+/* Вложенные пункты будут иметь отступы */
+.notes__text ul ul li, .notes__text ol ol li {
+    padding-left: 30px;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+/* Стиль для ссылки в списке */
+.notes__text a {
+    text-decoration: none;
+    color: #ff6347;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.notes__text a:hover {
+    color: #d35400;
+}

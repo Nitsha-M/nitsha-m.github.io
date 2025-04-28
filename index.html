@@ -6,49 +6,62 @@
     <title>30 day challenge</title>
     <link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="markdown.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <section class="calendar">
-        <div class="calendar__header">
-            <div class="calendar__header_logotype">
-                <img src="img/logo.png" alt="">
-            </div>
-            <div class="calendar__header_info">
-                <img src="img/nitsha.svg" alt="">
-                <span class="calendar__header_info-title">30 Day Challenge</span>
-                <span class="calendar__header_info-desc">Страничка отслеживания прогресса по моему 30-дневному челленджу саморазвития <3</span>
-            </div>
-            <div class="calendar__header_info-2">
-                <span>Здесь вы можете отслеживать мой прогресс по выполнению челленджа, а так же почитать разные заметки нажав на кнопку категории внутри карточки дня</span>
-            </div>
-            <div class="calendar__header_info-example">
-                <span>Категории и пример заметок:</span>
-                <div class="calendar__item_buttons">
-                    <div class="calendar__button">
-                        <div class="calendar__button_cont">
-                            <div class="calendar__button_cont-icon"></div>
-                            <span>Пианино — нажми</span>
-                        </div>
-                    </div>
-                    <div class="calendar__button">
-                        <div class="calendar__button_cont">
-                            <div class="calendar__button_cont-icon"></div>
-                            <span>Спорт — нажми</span>
-                        </div>
-                    </div>
-                    <div class="calendar__button">
-                        <div class="calendar__button_cont">
-                            <div class="calendar__button_cont-icon"></div>
-                            <span>Рисование — нажми</span>
-                        </div>
-                    </div>
-            </div>
-            </div>
+    <section class="notes">
+        <div class="notes__black-screen"></div>
+        <div class="notes__content">
+            <div class="notes__close">✕</div>
+            <div class="notes__text"></div>
         </div>
-        <div id="c-cont" class="calendar__content"></div>
+    </section>
+
+    <section class="calendar__section">
+        <div class="calendar">
+            <div class="calendar__header">
+                <div class="calendar__header_logotype">
+                    <img src="img/logo.png" alt="">
+                </div>
+                <div class="calendar__header_info">
+                    <img src="img/nitsha.svg" alt="">
+                    <span class="calendar__header_info-title">30 Day Challenge</span>
+                    <span class="calendar__header_info-desc">Страничка отслеживания прогресса по моему 30-дневному челленджу саморазвития <3</span>
+                </div>
+                <div class="calendar__header_info-2">
+                    <span>Здесь вы можете отслеживать мой прогресс по выполнению челленджа, а так же почитать разные заметки нажав на кнопку категории внутри карточки дня</span>
+                </div>
+                <div class="calendar__header_info-example">
+                    <span>Категории и пример заметок:</span>
+                    <div class="calendar__item_buttons">
+                        <div class="calendar__button" c-day="0" c-btn="0">
+                            <div class="calendar__button_cont">
+                                <div class="calendar__button_cont-icon"></div>
+                                <span>Пианино — нажми</span>
+                            </div>
+                        </div>
+                        <div class="calendar__button" c-day="0" c-btn="0">
+                            <div class="calendar__button_cont">
+                                <div class="calendar__button_cont-icon"></div>
+                                <span>Спорт — нажми</span>
+                            </div>
+                        </div>
+                        <div class="calendar__button" c-day="0" c-btn="0">
+                            <div class="calendar__button_cont">
+                                <div class="calendar__button_cont-icon"></div>
+                                <span>Рисование — нажми</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c-cont" class="calendar__content"></div>
+        </div>
     </section>
 
     <div class="for-generator" style="display: none;">
+        <input type="file" id="file-input" style="display: none;">
         <div class="calendar__item">
             <div class="calendar__item_info">
                 <span class="calendar__item_info-count">#1</span>
@@ -96,123 +109,8 @@
             </svg>
         </div>
     </div>
-
-    <script>
-        var today = new Date();
-        async function getTime() {
-            try {
-                const response = await fetch('http://worldtimeapi.org/api/timezone/Asia/Tashkent');
-                const data = await response.json();
-                const datetime = data.datetime;
-                today = new Date(datetime);
-            } catch (error) {
-                console.error('Ошибка при получении времени:', error);
-            }
-        }
-
-        const dayName = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
-        const monthName = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
-
-        const startDay = 24;
-        const startMonth = 3;
-        const startYear = 2025;
-        const template = document.querySelector('.for-generator .calendar__item');
-        const empty = document.querySelector('.for-generator .calendar__empty-item');
-        const container = document.getElementById('c-cont');
-
-        var currentDay = startDay;
-        var currentMonth = startMonth;
-        var currentYear = startYear;
-
-        var generateNewItem = function (index) {
-            let maxDayInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-            let currentDate = new Date(currentYear, currentMonth, currentDay);
-
-            let itemCount = template.querySelector('.calendar__item_info-count');
-            let itemDate = template.querySelector('.calendar__item_info-date');
-
-            let spans = itemDate.querySelectorAll('span');
-            spans[0].textContent = dayName[currentDate.getDay()];
-            spans[1].textContent = currentDay + ' ' + monthName[currentMonth];
-            itemCount.textContent = '#' + index;            
-
-            if ((currentDay > today.getDate()) || (currentMonth != today.getMonth())) template.classList += " disabled";
-
-            currentDay++;
-            if (currentDay > maxDayInMonth) {
-                currentDay = 1;
-                currentMonth++;
-                if (currentMonth > 11) {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-            }
-        }
-
-        var correctSpace = function() {
-            let startDate = new Date(startYear, startMonth, startDay);
-            let calendarStart = (startDate.getDay() + 6) % 7 + 1;
-            container.querySelector('div').style = "grid-column-start: " + calendarStart + ";";
-            
-            let cloneBefore = empty.cloneNode(true);
-            cloneBefore.style = "grid-column: span " + (calendarStart - 1) + ";"
-            
-            let cloneAfter = empty.cloneNode(true);
-            cloneAfter.style = "grid-column: span " + (6 - calendarStart) + ";"
-            
-            if(calendarStart > 1) container.insertBefore(cloneBefore, container.firstChild);
-            if(calendarStart < 6) container.appendChild(cloneAfter);
-        }
-
-        for (let i = 0; i < 30; i++) {
-            generateNewItem(i + 1);
-            let clone = template.cloneNode(true);
-            container.appendChild(clone);
-        }
-        correctSpace();
-
-        const svgCanvas = document.querySelectorAll('.calendar .catIcon');
-        const maxDistance = 6;
-        const maxAngle = 5;
-        document.addEventListener('mousemove', (event) => {
-            svgCanvas.forEach(svgC => {
-                let eyesGroup = svgC.querySelector('.eyesGroup');
-                let catFace = svgC.querySelector('.faceGroup');
-
-                let mouseX = event.clientX;
-                let mouseY = event.clientY;
-
-                // Получаем центр группы глаз
-                let groupRect = svgC.getBoundingClientRect();
-                let centerX = groupRect.left + (groupRect.width / 2);
-                let centerY = groupRect.top + (groupRect.height / 2);
-
-                // Вычисляем смещение для глаз
-                let deltaX = mouseX - centerX;
-                let deltaY = mouseY - centerY;
-
-                // Ограничиваем движение глаз
-                let distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), maxDistance);
-
-                // Нормализуем и вычисляем новые координаты для глаз
-                let angle = Math.atan2(deltaY, deltaX);
-                let offsetX = distance * Math.cos(angle);
-                let offsetY = distance * Math.sin(angle);
-
-                // Рассчитываем нормализованные координаты мыши
-                let normalizedX = (mouseX / window.innerWidth) * 2 - 1;
-                let normalizedY = (mouseY / window.innerHeight) * 2 - 1;
-
-                // Задаем углы вращения по осям
-                let rotateX = normalizedY * maxAngle;
-                let rotateY = (normalizedX * -1) * maxAngle;
-
-                eyesGroup.setAttribute('transform', `translate(${offsetX}, ${offsetY})`);
-                catFace.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-            
-        });
-    </script>
+    <script src="js/script.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/animation.js"></script>
 </body>
 </html>

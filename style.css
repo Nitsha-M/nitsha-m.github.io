@@ -20,10 +20,7 @@ body {
     height: 100%;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--page-color);
+        background-color: var(--page-color);
 }
 
 /* Main CSS */
@@ -39,6 +36,14 @@ body {
 
     --page-color: rgb(240, 240, 240);
     --calendar-color: white;
+}
+
+.calendar__section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .calendar {
@@ -313,6 +318,75 @@ body {
     transform-origin: center;
 }
 
+/* Notes */
+
+.notes {
+    position: fixed;
+    height: 100vh;
+    z-index: 999;
+    width: 100vw;
+    top: 0;
+    pointer-events: none;
+}
+
+.notes__black-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+.notes__content {
+    width: 30rem;
+    height: 100%;
+    background: white;
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+    transition: transform .4s ease;
+    padding: 1rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.notes.open {
+    display: block;
+    pointer-events: all;
+}
+
+.notes.open .notes__black-screen {
+    opacity: 1;
+}
+
+.notes.open .notes__content {
+    transform: translateX(0);
+}
+
+.notes__text {
+    overflow-x: hidden;
+}
+
+.notes__close {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    background: rgb(240, 240, 240);
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 222;
+    cursor: pointer;
+}
+
+.notes__close:hover {
+    background: rgb(224, 224, 224);
+}
+
 /* Media */
 
 @media (max-width: 2800px) {
@@ -393,7 +467,7 @@ body {
     }
 
     .calendar__header_info {
-        flex-basis: calc(98% - 12rem);
+        flex-basis: calc(96% - 12rem);
     }
 
     .calendar__header_info-2 {
@@ -414,6 +488,10 @@ body {
 @media (max-width: 767.98px) {
     :root {
         font-size: 20px;
+    }
+
+    .notes__content {
+        width: 100%;
     }
 
     .calendar__header {

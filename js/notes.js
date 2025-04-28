@@ -36,7 +36,9 @@ var closeNotes = function() {
 }
 
 function loadAndParseMarkdown(url) {
-    fetch(url)
+    fetch(url, {
+        cache: 'no-cache'
+    })
         .then(response => response.text())
         .then(markdownContent => {
             let htmlContent = marked.parse(markdownContent);

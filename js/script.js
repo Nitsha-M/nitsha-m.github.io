@@ -29,7 +29,7 @@ var loadConfigs = function() {
     let url = 'config.json?v=' + new Date().getTime();
     return new Promise((resolve, reject) => {
         fetch(url, {
-            cache: 'no-cache' // Отключаем кэширование
+            cache: 'no-cache'
         })
             .then(response => response.json())
             .then(data => {
@@ -43,11 +43,11 @@ var loadConfigs = function() {
 
                 daysData = data.days;
                 
-                resolve(); // Завершаем Promise, когда данные загружены
+                resolve();
             })
             .catch(error => {
                 console.error('Ошибка при загрузке файла:', error);
-                reject(error); // Ожидаем обработку ошибки
+                reject(error);
             });
     });
 }

@@ -26,8 +26,9 @@ var startYear = 2025;
 
 var daysData;
 var loadConfigs = function() {
+    let url = 'config.json?v=' + new Date().getTime();
     return new Promise((resolve, reject) => {
-        fetch('https://raw.githubusercontent.com/Nitsha-M/nitsha-m.github.io/refs/heads/main/config.json')
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 startDay = data.config.startDay;

@@ -1,6 +1,7 @@
 const blackScreen = document.querySelector('.notes__black-screen');
 const notesClose = document.querySelector('.notes__close');
 const noteWindow = document.querySelector('.notes');
+const lastUpdate = "29042025_1"
 
 blackScreen.addEventListener('click', () => {
     closeNotes();
@@ -18,7 +19,7 @@ var openNotes = function(day, file) {
     let noteWindow = document.querySelector('.notes');
     noteWindow.classList = "notes open";
 
-    let url = `notes/${day}/${file}.md`;
+    let url = `notes/${day}/${file}.md?v=${lastUpdate}`;
     loadAndParseMarkdown(url);
 }
 

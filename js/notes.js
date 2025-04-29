@@ -1,7 +1,7 @@
 const blackScreen = document.querySelector('.notes__black-screen');
 const notesClose = document.querySelector('.notes__close');
 const noteWindow = document.querySelector('.notes');
-const lastUpdate = "29042025_1"
+const lastUpdate = "29042025_2"
 
 blackScreen.addEventListener('click', () => {
     closeNotes();

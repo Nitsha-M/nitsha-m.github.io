@@ -185,12 +185,12 @@ body {
     padding-top: 0.2rem;
 }
 
-.calendar__button:nth-child(1) .calendar__button_cont { background-color: rgb(233, 200, 236); }
-.calendar__button:nth-child(2) .calendar__button_cont { background-color: rgb(200, 221, 236); }
+.calendar__button:nth-child(2) .calendar__button_cont { background-color: rgb(233, 200, 236); }
+.calendar__button:nth-child(1) .calendar__button_cont { background-color: rgb(200, 221, 236); }
 .calendar__button:nth-child(3) .calendar__button_cont { background-color: rgb(255, 229, 173); }
 
-.calendar__button:nth-child(1) .calendar__button_cont-icon { background-image: url('img/btn_piano.png'); }
-.calendar__button:nth-child(2) .calendar__button_cont-icon { background-image: url('img/btn_sport.png'); }
+.calendar__button:nth-child(2) .calendar__button_cont-icon { background-image: url('img/btn_piano.png'); }
+.calendar__button:nth-child(1) .calendar__button_cont-icon { background-image: url('img/btn_sport.png'); }
 .calendar__button:nth-child(3) .calendar__button_cont-icon { background-image: url('img/brn_draw.png'); }
 
 .calendar__button:hover .calendar__button_cont {

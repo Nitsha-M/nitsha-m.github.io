@@ -114,6 +114,11 @@ var updateAllStates = function() {
         btns[1].classList = `calendar__button_cont-status ${s2}`;
         btns[2].classList = `calendar__button_cont-status ${s3}`;
     }
+    document.querySelectorAll('.calendar__button').forEach(element => {
+        element.addEventListener('click', () => {
+            openNotes(element.getAttribute("c-day"), element.getAttribute("c-btn"));
+        });
+    });
 }
 
 window.onload = async function() {

@@ -1,13 +1,6 @@
-const notesBtns = document.querySelectorAll('.calendar__button');
 const blackScreen = document.querySelector('.notes__black-screen');
 const notesClose = document.querySelector('.notes__close');
 const noteWindow = document.querySelector('.notes');
-
-notesBtns.forEach(element => {
-    element.addEventListener('click', () => {
-        openNotes(element.getAttribute("c-day"), element.getAttribute("c-btn"));
-    });
-});
 
 blackScreen.addEventListener('click', () => {
     closeNotes();

@@ -71,7 +71,6 @@ var generateNewItem = function (index) {
     let buttons = template.querySelectorAll('.calendar__button');
     buttons.forEach((button, i) => {
         button.setAttribute('c-day', index);
-        button.setAttribute('c-btn', i + 1);
     }); 
 
     if ((currentDay > today.getDate()) || (currentMonth != today.getMonth())) template.classList = "calendar__item disabled";

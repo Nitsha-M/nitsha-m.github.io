@@ -564,6 +564,15 @@ body {
         width: calc(100% - 1rem);
         margin: 0.5rem 0;
     }
+    .notes__content {
+        padding: 1rem 1rem 4.5rem 1rem;
+    }
+    .notes__header {
+        border-radius: 0.5rem 0.5rem 0 0;
+        bottom: 0;
+        top: unset;
+    }
+    
 }
 
 @media (max-width: 626px) {

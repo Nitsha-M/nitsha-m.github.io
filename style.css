@@ -372,19 +372,33 @@ body {
     width: 2rem;
     height: 2rem;
     display: flex;
-    background: rgb(240, 240, 240);
+    background: rgb(201, 201, 201);
     align-items: center;
     justify-content: center;
     border-radius: 0.4rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
     z-index: 222;
     cursor: pointer;
 }
 
 .notes__close:hover {
-    background: rgb(224, 224, 224);
+    background: rgb(180, 180, 180);
+}
+
+.notes__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(231, 231, 231);
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+}
+
+.notes__header_title {
+    word-break: keep-all;
+    white-space: pre;
+    overflow: hidden;
+    max-width: 90%;
+    text-overflow: ellipsis;
 }
 
 /* Media */

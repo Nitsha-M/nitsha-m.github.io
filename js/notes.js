@@ -2,6 +2,8 @@ const blackScreen = document.querySelector('.notes__black-screen');
 const notesClose = document.querySelector('.notes__close');
 const noteWindow = document.querySelector('.notes');
 
+const typeNames = ["Спорт", "Пиано", "Рисование"];
+
 blackScreen.addEventListener('click', () => {
     closeNotes();
 });
@@ -18,8 +20,7 @@ var openNotes = function(day, file) {
     let noteWindow = document.querySelector('.notes');
     noteWindow.classList = "notes open";
 
-    let url = `notes/${day}/${file}.md?v=${lastUpdate}`;
-    loadAndParseMarkdown(url);
+    loadAndParseMarkdown(day, file);
 }
 
 var closeNotes = function() {
@@ -28,7 +29,8 @@ var closeNotes = function() {
     noteWindow.classList = "notes";
 }
 
-function loadAndParseMarkdown(url) {
+function loadAndParseMarkdown(day, type) {
+    let url = `notes/${day}/${type}.md?v=${lastUpdate}`;
     fetch(url, {
         cache: 'no-cache'
     })
@@ -36,6 +38,7 @@ function loadAndParseMarkdown(url) {
         .then(markdownContent => {
             let htmlContent = marked.parse(markdownContent);
             document.querySelector('.notes__text').innerHTML = htmlContent;
+            document.querySelector('.notes__header_title').innerHTML = `День ${day} — ${typeNames[type - 1]}`;
         })
         .catch(error => {
             console.error('Ошибка при загрузке файла:', error);

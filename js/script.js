@@ -26,7 +26,7 @@ var startYear = 2025;
 
 var daysData;
 var loadConfigs = function() {
-    let url = 'config.json?v=' + new Date().getTime();
+    let url = `config.json?v=${lastUpdate}`;
     return new Promise((resolve, reject) => {
         fetch(url, {
             cache: 'no-cache'
@@ -73,7 +73,10 @@ var generateNewItem = function (index) {
         button.setAttribute('c-day', index);
     }); 
 
-    if ((currentDay > today.getDate()) || (currentMonth != today.getMonth())) template.classList = "calendar__item disabled";
+    
+    if ((currentDay > today.getDate()) && (currentMonth >= today.getMonth())) {
+        template.classList = "calendar__item disabled";
+    }
 
     currentDay++;
     if (currentDay > maxDayInMonth) {
@@ -103,7 +106,6 @@ var correctSpace = function() {
 
 var updateAllStates = function() {
     let states = container.querySelectorAll(".calendar__item_buttons");
-    console.log(states);
     for (let i = 0; i < states.length; i++) {
         let btns = states[i].querySelectorAll(".calendar__button_cont-status");
         let s1 = (daysData[i][0]) ? "complete" : "incomplete";
